@@ -13,7 +13,9 @@ import {useLoaderData} from "react-router-dom";
 
 function HeroSection() {
 
-    const [dropDownOptions, setDropDownOptions ] = useState([]);
+    const [googleUrl,setGoogleUrl] = useState("BrandProtektor")
+
+    const [dropDownOptions, setDropDownOptions] = useState([]);
     const [dropDownValue, setDropDownValue] = useState('Select One');
     const data = useLoaderData();
 
@@ -32,6 +34,13 @@ function HeroSection() {
         })
         setKeyword(_keyword);
         setDropDownValue(event.target.value);
+
+    }
+    const searchOnGoogle = (event)=>
+    {
+
+        const  searchKeyword = event.target.value.split(' ').join('+');
+        setGoogleUrl(`https://www.google.com/search?igu=1&ei=&q=${searchKeyword}`);
 
     }
     return (<>
@@ -70,15 +79,19 @@ function HeroSection() {
                         <ul className="text-[16px] leading-10 mt-10">
                             {
                                 keyword.map((k,i) => (
-                                    <li key={k.id} className="text-sm sm:text-[16px] p-3 mb-6"><span className="border border-dashed border-white rounded-[100%] p-2 mr-2">{i+1}</span>
-                                        <button value={k.name}>{k.name}</button>
+                                    <li key={k.id} className="text-sm sm:text-[16px] p-3 mb-6" ><span className="border border-dashed border-white rounded-[100%] p-2 mr-2">{i+1}</span>
+                                        <button onClick={searchOnGoogle} value={k.name}>{k.name} </button>
                                     </li>
                                 ))
                             }
                         </ul>
                     </div>
                     <div className="col-span-2 w-full h-full bg-white">
-                        <img src={GooglePage}/>
+                        <iframe id="inlineFrameExample"
+                                className="col-span-2 w-full h-full bg-white"
+                                title="Inline Frame Example"
+                                src={googleUrl}>
+                        </iframe>
                     </div>
                 </div>
             </div>
