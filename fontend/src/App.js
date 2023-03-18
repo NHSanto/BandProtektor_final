@@ -1,12 +1,9 @@
 import './App.css';
 import './index.css';
 import HeroSection from "./Components/HeroSection/HeroSection";
-import SideMenu from "./Components/SideMenu";
 import DetailsSection from "./Components/DetailsSection";
 import ImgDiagramSection from "./Components/ImgDiagramSection";
 import Footer from "./Components/Footer";
-import {Route} from "react-router-dom";
-
 
 
 
