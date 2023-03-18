@@ -1,22 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import Logo from '../../Assets/Group.png';
-import GoogleLogo from '../../Assets/Frame 9.png';
 import '../../index.css';
-import DropDown from "../DropDown";
-import SideMenu, {ChangeKeyword} from "../SideMenu";
 import CompanyNameLogo from "./CompanyNameLogo";
-import Moto from "./Moto";
-
-import GooglePage from "../../Assets/screencapture-google-search-2023-03-08-19_56_02.png";
 import {useLoaderData} from "react-router-dom";
 
 
 function HeroSection() {
 
-    const [googleUrl,setGoogleUrl] = useState("BrandProtektor")
+    const [googleUrl,setGoogleUrl] = useState("https://www.google.com/search?igu=1&ei=&q=+brandprotektor")
 
     const [dropDownOptions, setDropDownOptions] = useState([]);
-    const [dropDownValue, setDropDownValue] = useState('Select One');
+    const [dropDownValue, setDropDownValue] = useState("");
     const data = useLoaderData();
 
     useEffect( () => {
@@ -36,10 +30,10 @@ function HeroSection() {
         setDropDownValue(event.target.value);
 
     }
+
     const searchOnGoogle = (event)=>
     {
-
-        const  searchKeyword = event.target.value.split(' ').join('+');
+        const searchKeyword = event.target.value.split(' ').join('+');
         setGoogleUrl(`https://www.google.com/search?igu=1&ei=&q=${searchKeyword}`);
 
     }
@@ -56,7 +50,8 @@ function HeroSection() {
                     <div className="flex flex-wrap justify-center mt-10 gap-6">
 
                         <div className="pt-3">
-                            <select className="w-52 h-10 bg-[#173B33] border-none text-white rounded-md border-[#1B463D] cursor-pointer" value={dropDownValue} onChange={ChangeKeyword}>
+                            <select className="w-52 h-10 bg-[#173B33] border-none text-white rounded-md border-[#1B463D] cursor-pointer" onChange={ChangeKeyword}>
+                                <option hidden>{"Select your domain"}</option>
                                 {dropDownOptions?.map(v=>(
                                     <option key={v.id} value={v.domain}>
                                         {v.domain}
@@ -73,14 +68,14 @@ function HeroSection() {
                 <button className="transform transition-all ease-in-out duration-500 font-bold w-52 h-14 rounded-3xl text-center bg-[#15CD5E] bg-gradient-to-br from-[#15CD5E] via-[#F9FF50] hover:-translate-y-1 hover:scale-100 bg-size-200 bg-pos-0 hover:bg-pos-100">FIGHT BACK NOW</button>
             </div>
         </section>
-            <div className="flex flex-row h-auto bg-[#0F1C1D]">
+            <div className="flex flex-row h-[40rem] bg-[#0F1C1D]">
                 <div className="grid grid-cols-1 sm:grid-cols-3 w-full">
                     <div className="w-auto h-full text-white flex flex-row justify-center">
                         <ul className="text-[16px] leading-10 mt-10">
                             {
                                 keyword.map((k,i) => (
-                                    <li key={k.id} className="text-sm sm:text-[16px] p-3 mb-6" ><span className="border border-dashed border-white rounded-[100%] p-2 mr-2">{i+1}</span>
-                                        <button onClick={searchOnGoogle} value={k.name}>{k.name} </button>
+                                    <li key={k.id} className="text-sm sm:text-[16px] p-3 mb-6"><span className="border border-dashed border-white rounded-[100%] p-2 mr-2">{i+1}</span>
+                                        <button onClick={searchOnGoogle} value={k.name}>{k.name}</button>
                                     </li>
                                 ))
                             }
