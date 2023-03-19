@@ -1,28 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import { createRoot } from "react-dom/client";
-import {
-    createBrowserRouter,
-    RouterProvider
-} from "react-router-dom";
-
-
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 
 const options = {
-    method: "POST",
-    headers: myHeaders,
-    mode: "cors",
-    cache: "default",
+  method: "POST",
+  headers: myHeaders,
+  mode: "cors",
+  cache: "default",
 };
-
-
-
 
 // const fetchData = () =>{
 //     return fetch(`http://localhost:3001/domainkeyword/${params.userName}`,options)
@@ -32,19 +24,22 @@ const options = {
 // }
 
 const router = createBrowserRouter([
-    {
-        path: "/:userName",
-        element:  <App />,
-        loader: async ({ params }) => {
-            return fetch(`http://localhost:3001/domainkeyword/${params.userName}`,options);
-        },
+  {
+    path: "/:userName",
+    element: <App />,
+    loader: async ({ params }) => {
+      return fetch(
+        `http://localhost:3001/domainkeyword/${params.userName}`,
+        options
+      );
     },
+  },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
