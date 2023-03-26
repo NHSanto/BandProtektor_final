@@ -2,9 +2,12 @@ import { NextFunction, Request, Response } from "express";
 import * as fs from "fs";
 import { saveToDomainKeyWord } from "../controller/domainKeyWordController";
 import { parse } from "csv";
+import * as csvParser from "csv-parser";
+import * as util from "util";
 const success = {
   success: "file successfully upload",
 };
+const deleteFile = util.promisify(fs.unlink);
 
 export function saveToDatabase(
   request: Request,
@@ -48,6 +51,7 @@ export function saveToDatabase(
         });
       })
       .on("end", function () {
+        deleteFile(file.path).then(r => console.log("Delete Locally saved files"))
         console.log("finished");
       })
       .on("error", function (err) {
